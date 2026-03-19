@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "react-best-practices": {
+      "source": "vercel-labs/vercel-plugin",
+      "sourceType": "github",
+      "computedHash": "81f6e3ff8a3e19f77fa16b068f8ba4de8f70209ff75e5f695e83d08b4073194f"
+    },
+    "responsive-design": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "1c2c94867cc1eeca74977d57b0d9818616934a62a58e100d9350ff11cd7244fd"
+    }
+  }
+}

@@ -1,0 +1,232 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Courier New', monospace;
+
+  --color-base: #080807;
+  --color-gold: #C9A84C;
+  --color-gold-dim: rgba(201, 168, 76, 0.12);
+  --color-surface: #0F0F0E;
+  --color-elevated: #161512;
+  --color-border-dark: #1E1C18;
+  --color-border-input: #2A2820;
+  --color-cream: #E8E4DC;
+  --color-muted: #8A8580;
+  --color-subtle: #4A4840;
+  --color-ghost: #3E3C38;
+}
+
+/* ── Light mode overrides (when .dark class is absent from <html>) ── */
+
+:root:not(.dark) {
+  --color-base:         #F7F4EF;
+  --color-surface:      #F0ECE4;
+  --color-elevated:     #E8E3D8;
+  --color-border-dark:  #D0CAC0;
+  --color-border-input: #C8C2B4;
+  --color-cream:        #1A1815;
+  --color-muted:        #6A6560;
+  --color-subtle:       #9A948C;
+  --color-ghost:        #B4AEA6;
+  --color-gold-dim:     rgba(201, 168, 76, 0.18);
+}
+
+/* ── Base ──────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-cream);
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+}
+
+/* Selection */
+::selection {
+  background-color: rgba(201, 168, 76, 0.22);
+  color: #E8E4DC;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--color-base); transition: background 0.3s ease; }
+::-webkit-scrollbar-thumb { background: #C9A84C; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #D4B55A; }
+
+/* ── Animations ─────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes expandW {
+  from { transform: scaleX(0); transform-origin: left; }
+  to   { transform: scaleX(1); transform-origin: left; }
+}
+
+.animate-fade-up   { animation: fadeUp 0.72s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.animate-fade-in   { animation: fadeIn 0.6s ease both; }
+.animate-expand-w  { animation: expandW 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-700 { animation-delay: 700ms; }
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  60%       { transform: scale(2); opacity: 0; }
+}
+
+.pulse-dot {
+  animation: pulseDot 2.2s ease-in-out infinite;
+}
+
+@keyframes skillFill {
+  from { width: 0; }
+  to   { width: var(--skill-w, 0%); }
+}
+
+.skill-bar {
+  animation: skillFill 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+/* ── Design tokens (utility classes) ─────────── */
+
+/* Gold tiny label — monospace uppercase */
+.section-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #C9A84C;
+  margin-bottom: 1rem;
+}
+
+/* Gold horizontal rule */
+.gold-rule {
+  display: block;
+  height: 1px;
+  background: linear-gradient(90deg, #C9A84C 0%, rgba(201, 168, 76, 0) 100%);
+  margin: 1.5rem 0;
+}
+
+/* Playfair Display — use instead of inline fontFamily style */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Display heading — Playfair Display */
+.display-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--color-cream);
+  letter-spacing: -0.02em;
+  transition: color 0.3s ease;
+}
+
+/* Hero name — larger clamp variant of display-title, used only in Hero.tsx */
+.display-hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 13vw, 9rem);
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
+}
+
+/* Dark card */
+.card-dark {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-dark);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+}
+
+.dark .card-dark {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.55),
+    0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.card-dark:hover {
+  border-color: rgba(201, 168, 76, 0.3);
+  background-color: var(--color-elevated);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.1),
+    0 8px 24px rgba(0, 0, 0, 0.07),
+    0 0 0 1px rgba(201, 168, 76, 0.07);
+  transform: translateY(-1px);
+}
+
+.dark .card-dark:hover {
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(201, 168, 76, 0.07);
+}
+
+/* Dark inputs */
+.input-dark {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-input);
+  color: var(--color-cream);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease, color 0.3s ease;
+  border-radius: 2px;
+  resize: none;
+}
+
+.input-dark::placeholder {
+  color: var(--color-ghost);
+}
+
+.input-dark:focus {
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.1);
+}
+
+/* Focus ring for interactive elements */
+.focus-gold:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(201, 168, 76, 0.5);
+}
