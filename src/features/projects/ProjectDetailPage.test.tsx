@@ -1,25 +1,21 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@context/ThemeContext';
 import { LanguageProvider } from '@context/LanguageContext';
 import { ProjectDetailPage } from './ProjectDetailPage';
 import { PROJECTS } from './projects.data';
 
-// ProjectDetailPage reads both ThemeContext (GitHub icon variant) and
-// LanguageContext (translated copy). Default language without localStorage
-// is 'es', so assertions below read the `.es` variant of each field.
+// Default language without localStorage is 'es', so assertions below read
+// the `.es` variant of each field.
 function renderAt(path: string) {
   return render(
-    <ThemeProvider>
-      <LanguageProvider>
-        <MemoryRouter initialEntries={[path]}>
-          <Routes>
-            <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
-          </Routes>
-        </MemoryRouter>
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <MemoryRouter initialEntries={[path]}>
+        <Routes>
+          <Route path="/proyectos/:id" element={<ProjectDetailPage />} />
+        </Routes>
+      </MemoryRouter>
+    </LanguageProvider>
   );
 }
 

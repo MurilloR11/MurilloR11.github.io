@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { ThemeProvider } from '@context/ThemeContext';
 import { LanguageProvider } from '@context/LanguageContext';
 import { useTranslation } from '@i18n/translations';
 import { Navbar } from '@components/layout/Navbar/Navbar';
@@ -68,10 +67,8 @@ function AppShell() {
 // Named export per SKILL (main.tsx also updated to match)
 export function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppShell />
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <AppShell />
+    </LanguageProvider>
   );
 }

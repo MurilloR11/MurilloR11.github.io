@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { GitHubDark, GitHubLight } from '@ridemountainpig/svgl-react';
-import { useTheme } from '@context/ThemeContext';
+import { GitHubDark } from '@ridemountainpig/svgl-react';
 import { useLanguage } from '@context/LanguageContext';
 import { useTranslation } from '@i18n/translations';
 import { PROJECTS } from './projects.data';
@@ -21,10 +20,8 @@ function StackBadge({ label }: { label: string }) {
 
 export function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
-  const { mode } = useTheme();
   const { language } = useLanguage();
   const t = useTranslation();
-  const GitHubIcon = mode === 'dark' ? GitHubDark : GitHubLight;
   const index = PROJECTS.findIndex((p) => p.id === id);
   const project = index === -1 ? undefined : PROJECTS[index];
 
@@ -67,7 +64,7 @@ export function ProjectDetailPage() {
             className="group/link inline-flex w-fit items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] font-medium uppercase tracking-widest text-gold transition-colors duration-200 hover:border-gold hover:text-cream focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
           >
             <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center" aria-hidden="true">
-              <GitHubIcon width="100%" height="100%" />
+              <GitHubDark width="100%" height="100%" />
             </span>
             {t.projectDetail.viewOnGithub}
             <span

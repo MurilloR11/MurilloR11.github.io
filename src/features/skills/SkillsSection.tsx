@@ -1,5 +1,4 @@
 import { Section } from '@components/layout/Section/Section';
-import { useTheme } from '@context/ThemeContext';
 import { useLanguage } from '@context/LanguageContext';
 import { useTranslation } from '@i18n/translations';
 import { SKILL_CATEGORIES, type SkillItem } from './skills.data';
@@ -9,9 +8,7 @@ const CATEGORY_BASE_DELAY_MS = 400;
 const CATEGORY_STAGGER_MS = 100;
 
 function SkillBadge({ skill }: { skill: SkillItem }) {
-  const { mode } = useTheme();
-  const useLight = mode === 'light' && skill.iconLight;
-  const IconComponent = useLight ? skill.iconLight! : skill.icon;
+  const IconComponent = skill.icon;
 
   return (
     <li

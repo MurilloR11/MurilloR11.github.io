@@ -18,21 +18,6 @@
   --color-ghost: #3E3C38;
 }
 
-/* ── Light mode overrides (when .dark class is absent from <html>) ── */
-
-:root:not(.dark) {
-  --color-base:         #F7F4EF;
-  --color-surface:      #F0ECE4;
-  --color-elevated:     #E8E3D8;
-  --color-border-dark:  #D0CAC0;
-  --color-border-input: #C8C2B4;
-  --color-cream:        #1A1815;
-  --color-muted:        #6A6560;
-  --color-subtle:       #9A948C;
-  --color-ghost:        #B4AEA6;
-  --color-gold-dim:     rgba(201, 168, 76, 0.18);
-}
-
 /* ── Base ──────────────────────────────────── */
 
 html {
@@ -173,32 +158,19 @@ body::after {
   border: 1px solid var(--color-border-dark);
   border-radius: 3px;
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
-}
-
-.dark .card-dark {
-  box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.55),
     0 4px 12px rgba(0, 0, 0, 0.35);
+  transition: border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 .card-dark:hover {
   border-color: rgba(201, 168, 76, 0.3);
   background-color: var(--color-elevated);
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.1),
-    0 8px 24px rgba(0, 0, 0, 0.07),
-    0 0 0 1px rgba(201, 168, 76, 0.07);
-  transform: translateY(-1px);
-}
-
-.dark .card-dark:hover {
-  box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.6),
     0 8px 24px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(201, 168, 76, 0.07);
+  transform: translateY(-1px);
 }
 
 /* Dark inputs */

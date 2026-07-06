@@ -84,10 +84,6 @@ interface Translations {
       };
     };
   };
-  themeToggle: {
-    activateLight: string;
-    activateDark: string;
-  };
   languageToggle: {
     activateSpanish: string;
     activateEnglish: string;
@@ -186,10 +182,6 @@ export const translations: Record<'es' | 'en', Translations> = {
         },
       },
     },
-    themeToggle: {
-      activateLight: 'Activar modo claro',
-      activateDark: 'Activar modo oscuro',
-    },
     languageToggle: {
       activateSpanish: 'Cambiar a español',
       activateEnglish: 'Cambiar a inglés',
@@ -285,10 +277,6 @@ export const translations: Record<'es' | 'en', Translations> = {
           messageRequired: 'Message is required.',
         },
       },
-    },
-    themeToggle: {
-      activateLight: 'Activate light mode',
-      activateDark: 'Activate dark mode',
     },
     languageToggle: {
       activateSpanish: 'Switch to Spanish',

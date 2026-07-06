@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { type NavLink } from '@app-types/global.types';
 import { useScrollSpy } from '@hooks/useScrollSpy';
 import { useTranslation } from '@i18n/translations';
-import { ThemeToggle } from '@components/ui/ThemeToggle/ThemeToggle';
 import { LanguageToggle } from '@components/ui/LanguageToggle/LanguageToggle';
 import { BrandLogo } from '@components/ui/BrandLogo/BrandLogo';
 
@@ -86,7 +85,6 @@ export function Navbar() {
           </ul>
 
           <LanguageToggle />
-          <ThemeToggle />
 
           {/* Hamburger button — mobile only */}
           <button
