@@ -101,7 +101,7 @@ export const translations: Record<'es' | 'en', Translations> = {
     nav: {
       about: 'Sobre mí',
       projects: 'Proyectos',
-      skills: 'Skills',
+      skills: 'Habilidades',
       education: 'Educación',
       contact: 'Contacto',
       skipToContent: 'Saltar al contenido',
@@ -130,7 +130,7 @@ export const translations: Record<'es' | 'en', Translations> = {
     },
     skills: {
       sectionLabel: '── 03 / tecnologías',
-      heading: 'Skills',
+      heading: 'Habilidades',
       subtitleLine1: 'Tecnologías y herramientas',
       subtitleLine2: 'con las que trabajo.',
     },
