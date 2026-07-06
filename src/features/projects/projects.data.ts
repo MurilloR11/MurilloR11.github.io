@@ -1,54 +1,66 @@
-import portafolioImage from '@assets/portafolio-image.png';
+import huellitasImage from '@assets/huellitas-image.png';
 import { type Project } from './projects.types';
 
 export const PROJECTS: Project[] = [
   {
-    id: 'portafolio-frontend',
-    title: { es: 'Portafolio Personal', en: 'Personal Portfolio' },
+    id: 'huellitas',
+    title: { es: 'Huellitas — Plataforma de Adopción Animal', en: 'Huellitas — Animal Adoption Platform' },
     description: {
-      es: 'Sitio web de portafolio personal con diseño dark/light, lazy loading por sección, animaciones CSS y sistema de tokens de diseño propio.',
-      en: 'Personal portfolio website with dark/light design, per-section lazy loading, CSS animations, and a custom design token system.',
+      es: 'Plataforma web con 4 roles (ciudadano, fundación, admin, developer) que centraliza la adopción de mascotas en el Tolima, Colombia, con datos en tiempo real vía Supabase.',
+      en: 'A web platform with 4 roles (citizen, foundation, admin, developer) that centralizes pet adoption in Tolima, Colombia, with real-time data via Supabase.',
     },
     longDescription: {
       es:
-        'Portafolio construido desde cero como una single-page application, pensado para cargar rápido y sentirse cuidado en cada detalle. ' +
-        'Cada sección (Skills, Proyectos, Contacto) se divide con React.lazy y Suspense para mantener el bundle inicial ligero, mientras que ' +
-        'un sistema de tokens de diseño propio en CSS custom properties resuelve el soporte de tema claro/oscuro sin duplicar estilos. ' +
-        'La tipografía combina una serif itálica para los títulos con una monoespaciada para el resto de la interfaz, buscando una identidad ' +
-        'visual propia en vez de una plantilla genérica de SaaS.',
+        'Huellitas conecta fundaciones animalistas con ciudadanos del Tolima, centralizando todo el proceso de adopción: desde el registro ' +
+        'del animal por parte de la fundación hasta la entrega final al adoptante. La plataforma maneja cuatro roles con flujos y paneles ' +
+        'completamente distintos: el ciudadano explora mascotas con filtros en tiempo real y aplica mediante un formulario multi-paso con ' +
+        'carga de documentos; la fundación gestiona su inventario de animales, revisa solicitudes y programa visitas de verificación; el ' +
+        'admin supervisa fundaciones, usuarios y mascotas del sistema completo con analíticas y logs de auditoría; y el developer consume una ' +
+        'API REST pública propia mediante API keys, con documentación interactiva vía Swagger UI. La autenticación corre sobre Supabase con ' +
+        'JWT, MFA por TOTP y códigos de respaldo, mientras que las actualizaciones de disponibilidad de mascotas y notificaciones llegan en ' +
+        'tiempo real por suscripciones a Supabase Realtime. El frontend consume un backend propio en Flask + PostgreSQL a través de un ' +
+        'cliente Axios con interceptores JWT.',
       en:
-        'A portfolio built from scratch as a single-page application, designed to load fast and feel considered in every detail. Each ' +
-        'section (Skills, Projects, Contact) is split with React.lazy and Suspense to keep the initial bundle light, while a custom design ' +
-        'token system in CSS custom properties handles light/dark theme support without duplicating styles. The typography combines an ' +
-        'italic serif for headings with a monospace typeface for the rest of the interface, aiming for its own visual identity instead of a ' +
-        'generic SaaS template.',
+        'Huellitas connects animal welfare foundations with citizens in Tolima, centralizing the entire adoption process: from a foundation ' +
+        'registering an animal to the final handoff to the adopter. The platform handles four roles with completely distinct flows and ' +
+        'dashboards: citizens explore pets with real-time filters and apply through a multi-step form with document uploads; foundations ' +
+        'manage their animal inventory, review requests, and schedule verification visits; admins oversee foundations, users, and pets ' +
+        'system-wide with analytics and audit logs; and developers consume a public REST API via API keys, backed by interactive Swagger UI ' +
+        'docs. Authentication runs on Supabase with JWT, TOTP-based MFA, and backup codes, while pet availability updates and notifications ' +
+        'arrive in real time through Supabase Realtime subscriptions. The frontend talks to a custom Flask + PostgreSQL backend through an ' +
+        'Axios client with JWT interceptors.',
     },
-    tags: ['React', 'TypeScript', 'Vite', 'TailwindCSS'],
+    tags: ['React', 'TypeScript', 'Supabase', 'TanStack Query'],
     stack: [
-      'React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router',
-      'ESLint', 'Prettier', 'Vitest', 'Testing Library',
+      'React', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router', 'TanStack Query',
+      'Supabase', 'Zod', 'Radix UI', 'Axios', 'Vitest', 'Playwright',
     ],
     notes: {
       es: [
-        'Tema claro/oscuro sin duplicar estilos: los colores viven como CSS custom properties en un único lugar, y una clase .dark en el ' +
-          'elemento raíz alterna el set de variables — ningún componente necesita estilos condicionales por tema.',
-        'Carga por secciones: todo lo que está debajo del Hero se divide con React.lazy y Suspense, así el bundle inicial solo incluye lo ' +
-          'que se ve en el primer scroll y el resto se descarga bajo demanda.',
-        'Identidad tipográfica propia: una serif itálica para los títulos combinada con una monoespaciada para el resto de la interfaz, ' +
-          'en vez de una tipografía sans genérica, para evitar el aspecto de plantilla SaaS.',
+        'Cuatro roles con guards de ruta propios: ciudadano, fundación, admin y developer tienen paneles, navegación y permisos ' +
+          'completamente separados, con estados intermedios como fundación "pendiente de aprobación" o "rechazada".',
+        'Tiempo real sin polling: disponibilidad de mascotas, nuevas solicitudes y notificaciones se actualizan vía suscripciones a ' +
+          'Supabase Realtime en vez de refrescar manualmente o hacer polling al backend.',
+        'Portal de developer con API pública: creación y revocación de API keys, métricas de uso (llamadas, errores, códigos de estado) y ' +
+          'documentación interactiva con Swagger UI generada desde una especificación OpenAPI propia.',
+        'Seguridad reforzada en cuenta de usuario: cambio de contraseña, autenticación de dos factores por TOTP y códigos de respaldo para ' +
+          'recuperación, todo integrado con Supabase Auth.',
       ],
       en: [
-        'Light/dark theme without duplicating styles: colors live as CSS custom properties in a single place, and a .dark class on the ' +
-          'root element swaps the variable set — no component needs conditional theme styles.',
-        "Section-based code splitting: everything below the Hero is split with React.lazy and Suspense, so the initial bundle only " +
-          "includes what's visible on first scroll and the rest loads on demand.",
-        'A typographic identity of its own: an italic serif for headings combined with a monospace typeface for the rest of the UI, ' +
-          'instead of a generic sans font, to avoid the generic SaaS-template look.',
+        'Four roles with their own route guards: citizen, foundation, admin, and developer have fully separate dashboards, navigation, and ' +
+          'permissions, including intermediate states like a foundation "pending approval" or "rejected".',
+        'Real-time without polling: pet availability, new requests, and notifications update via Supabase Realtime subscriptions instead of ' +
+          'manual refreshes or backend polling.',
+        'Developer portal with a public API: API key creation and revocation, usage metrics (calls, errors, status codes), and interactive ' +
+          'Swagger UI docs generated from a custom OpenAPI spec.',
+        'Hardened account security: password changes, TOTP-based two-factor authentication, and backup codes for recovery, all integrated ' +
+          'with Supabase Auth.',
       ],
     },
-    category: 'frontend',
-    githubUrl: 'https://github.com/MurilloR11/portafolio-version-1',
-    thumbnail: portafolioImage,
+    category: 'fullstack',
+    githubUrl: 'https://github.com/MurilloR11/huellitas-frontend',
+    liveUrl: 'https://huellitas-frontend-gamma.vercel.app/',
+    thumbnail: huellitasImage,
   },
   {
     id: 'project-1',
