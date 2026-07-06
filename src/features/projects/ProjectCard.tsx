@@ -6,25 +6,6 @@ interface ProjectCardProps {
   number: number;
 }
 
-function ProjectLink({ href, label }: { href: string; label: string }) {
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group/link flex items-center gap-1.5 text-[0.63rem] font-medium uppercase tracking-widest text-subtle transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
-    >
-      <span
-        aria-hidden="true"
-        className="inline-block transition-transform duration-150 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
-      >
-        ↗
-      </span>
-      {label}
-    </a>
-  );
-}
-
 // Subtle gradient per card index so placeholders look distinct
 const PLACEHOLDER_GRADIENTS = [
   'from-gold/10 via-elevated to-elevated',
@@ -38,16 +19,15 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
   const gradient = PLACEHOLDER_GRADIENTS[(number - 1) % PLACEHOLDER_GRADIENTS.length];
 
   return (
-    <article className="card-dark group/card relative flex flex-col overflow-hidden">
+    <article className="group/card flex flex-col gap-6 border-t border-border-dark py-10 first:border-t-0 first:pt-0 sm:flex-row sm:items-center sm:gap-10">
 
-      {/* Animated left gold accent */}
-      <span
-        aria-hidden="true"
-        className="absolute left-0 top-0 z-10 h-full w-0.5 origin-top scale-y-0 bg-gold/50 transition-transform duration-300 ease-out group-hover/card:scale-y-100"
-      />
+      {/* Index number */}
+      <span className="font-mono text-[0.65rem] tabular-nums text-subtle shrink-0 sm:self-start sm:pt-1">
+        {num}
+      </span>
 
-      {/* ── Image area ── always shown, ~50% of card */}
-      <div className="relative h-44 sm:h-48 lg:h-52 shrink-0 overflow-hidden">
+      {/* ── Image area ── */}
+      <div className="relative aspect-video w-full shrink-0 overflow-hidden rounded-sm sm:w-2/5 lg:w-[38%]">
         {thumbnail ? (
           <img
             src={thumbnail}
@@ -64,7 +44,7 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
             <span
               aria-hidden="true"
               className="font-display absolute right-5 bottom-4 select-none font-bold italic leading-none text-cream/6"
-              style={{ fontSize: 'clamp(5rem, 12vw, 7.5rem)' }}
+              style={{ fontSize: 'clamp(4rem, 10vw, 6rem)' }}
             >
               {num}
             </span>
@@ -83,49 +63,61 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
             </svg>
           </div>
         )}
-
-        {/* Bottom fade into card surface */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-surface to-transparent"
-        />
       </div>
 
       {/* ── Content ── */}
-      <div className="flex flex-1 flex-col p-6 pt-5">
+      <div className="flex flex-1 flex-col">
 
-        {/* Category + number */}
-        <div className="mb-3 flex items-center justify-between">
-          <span className="text-[0.58rem] font-medium uppercase tracking-widest text-gold/70">
-            {CATEGORY_LABELS[category]}
-          </span>
-          <span className="font-mono text-[0.6rem] tabular-nums text-subtle">
-            {num}
-          </span>
-        </div>
+        {/* Category */}
+        <span className="mb-2 text-[0.58rem] font-medium uppercase tracking-widest text-gold/70">
+          {CATEGORY_LABELS[category]}
+        </span>
 
         {/* Title */}
-        <h3 className="font-display mb-2.5 text-[1rem] font-bold italic leading-snug text-cream transition-colors duration-200 group-hover/card:text-gold">
+        <h3 className="font-display mb-3 text-[1.4rem] sm:text-[1.7rem] font-bold italic leading-tight text-cream transition-colors duration-200 group-hover/card:text-gold">
           {title}
           <span className="text-gold" aria-hidden="true">.</span>
         </h3>
 
         {/* Description */}
-        <p className="mb-4 flex-1 text-[0.73rem] leading-relaxed text-muted">
+        <p className="mb-4 max-w-xl text-[0.78rem] leading-relaxed text-muted">
           {description}
         </p>
 
         {/* Tags */}
-        <div className="mb-4 flex flex-wrap gap-1.5">
+        <div className="mb-5 flex flex-wrap gap-1.5">
           {tags.map((tag) => (
             <Badge key={tag} label={tag} />
           ))}
         </div>
 
-        {/* Links */}
-        <div className="flex items-center gap-5 border-t border-border-dark pt-4">
-          <ProjectLink href={githubUrl} label="GitHub" />
-          {liveUrl && <ProjectLink href={liveUrl} label="Demo" />}
+        {/* CTA — links to where everything about the project lives */}
+        <div className="flex flex-wrap items-center gap-5">
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group/link inline-flex w-fit items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] font-medium uppercase tracking-widest text-gold transition-colors duration-200 hover:border-gold hover:text-cream focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+          >
+            Ver proyecto
+            <span
+              aria-hidden="true"
+              className="inline-block transition-transform duration-150 group-hover/link:translate-x-1"
+            >
+              →
+            </span>
+          </a>
+
+          {liveUrl && (
+            <a
+              href={liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[0.63rem] font-medium uppercase tracking-widest text-subtle transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+            >
+              Demo ↗
+            </a>
+          )}
         </div>
 
       </div>

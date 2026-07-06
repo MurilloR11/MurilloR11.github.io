@@ -18,7 +18,7 @@ export function ProjectsSection() {
 
       <span className="gold-rule block mb-10 w-12" />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="flex flex-col">
         {PROJECTS.map((project, i) => (
           <ProjectCard key={project.id} project={project} number={i + 1} />
         ))}

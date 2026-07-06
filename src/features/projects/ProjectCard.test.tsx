@@ -29,12 +29,12 @@ describe('ProjectCard', () => {
     expect(screen.getByText('TypeScript')).toBeInTheDocument();
   });
 
-  it('renders the GitHub link', () => {
+  it('renders the "Ver proyecto" link pointing to the GitHub repo', () => {
     render(<ProjectCard project={baseProject} number={1} />);
-    const githubLink = screen.getByRole('link', { name: /github/i });
-    expect(githubLink).toHaveAttribute('href', 'https://github.com/user/repo');
-    expect(githubLink).toHaveAttribute('rel', 'noopener noreferrer');
-    expect(githubLink).toHaveAttribute('target', '_blank');
+    const projectLink = screen.getByRole('link', { name: /ver proyecto/i });
+    expect(projectLink).toHaveAttribute('href', 'https://github.com/user/repo');
+    expect(projectLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(projectLink).toHaveAttribute('target', '_blank');
   });
 
   it('does not render Demo link when liveUrl is not provided', () => {
