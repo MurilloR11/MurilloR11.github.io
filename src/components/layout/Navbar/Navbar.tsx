@@ -6,15 +6,16 @@ import { ThemeToggle } from '@components/ui/ThemeToggle/ThemeToggle';
 import { BrandLogo } from '@components/ui/BrandLogo/BrandLogo';
 
 const NAV_LINKS: NavLink[] = [
-  { label: 'Sobre mí',  href: '#about' },
-  { label: 'Skills',    href: '#skills' },
-  { label: 'Proyectos', href: '#projects' },
-  { label: 'Contacto',  href: '#contact' },
+  { label: 'Sobre mí',   href: '#about' },
+  { label: 'Proyectos',  href: '#projects' },
+  { label: 'Skills',     href: '#skills' },
+  { label: 'Educación',  href: '#education' },
+  { label: 'Contacto',   href: '#contact' },
 ];
 
 // Defined outside component so the array reference is stable across renders
 // (prevents useEffect in useScrollSpy from re-running on every render)
-const SECTION_IDS = ['about', 'skills', 'projects', 'contact'];
+const SECTION_IDS = ['about', 'projects', 'skills', 'education', 'contact'];
 
 export function Navbar() {
   const [isScrolled, setIsScrolled]   = useState(false);

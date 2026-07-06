@@ -11,6 +11,9 @@ const SkillsSection = lazy(() =>
 const ProjectsSection = lazy(() =>
   import('@features/projects/ProjectsSection').then((m) => ({ default: m.ProjectsSection }))
 );
+const EducationSection = lazy(() =>
+  import('@features/education/EducationSection').then((m) => ({ default: m.EducationSection }))
+);
 const ContactSection = lazy(() =>
   import('@features/contact/ContactSection').then((m) => ({ default: m.ContactSection }))
 );
@@ -39,6 +42,12 @@ export function HomePage() {
       <ErrorBoundary>
         <Suspense fallback={<SectionFallback />}>
           <SkillsSection />
+        </Suspense>
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <Suspense fallback={<SectionFallback />}>
+          <EducationSection />
         </Suspense>
       </ErrorBoundary>
 
