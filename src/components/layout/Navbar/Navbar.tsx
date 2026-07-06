@@ -90,7 +90,7 @@ export function Navbar() {
 
           {/* Hamburger button — mobile only */}
           <button
-            className="sm:hidden flex h-8 w-8 flex-col items-center justify-center gap-[5px] rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+            className="sm:hidden flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-[5px] rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             aria-label={isMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={isMenuOpen}

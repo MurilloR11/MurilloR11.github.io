@@ -11,7 +11,7 @@ export function ThemeToggle() {
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? t.themeToggle.activateLight : t.themeToggle.activateDark}
-      className="flex h-7 w-7 items-center justify-center rounded text-muted transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
+      className="flex h-7 w-7 cursor-pointer items-center justify-center rounded text-muted transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
     >
       {isDark ? (
         // Sun icon

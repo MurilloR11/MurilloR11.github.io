@@ -12,7 +12,7 @@ export function LanguageToggle() {
         onClick={() => setLanguage('es')}
         aria-label={t.languageToggle.activateSpanish}
         aria-current={language === 'es' ? 'true' : undefined}
-        className={`rounded px-1 py-0.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
+        className={`cursor-pointer rounded px-1 py-0.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
           language === 'es' ? 'text-gold' : 'text-muted hover:text-gold'
         }`}
       >
@@ -24,7 +24,7 @@ export function LanguageToggle() {
         onClick={() => setLanguage('en')}
         aria-label={t.languageToggle.activateEnglish}
         aria-current={language === 'en' ? 'true' : undefined}
-        className={`rounded px-1 py-0.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
+        className={`cursor-pointer rounded px-1 py-0.5 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
           language === 'en' ? 'text-gold' : 'text-muted hover:text-gold'
         }`}
       >

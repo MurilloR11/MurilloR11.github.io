@@ -38,7 +38,7 @@ export function Button({
       disabled={disabled}
       className={cn(
         'inline-flex items-center justify-center font-medium tracking-[0.12em] uppercase',
-        'transition-all duration-200 rounded-sm',
+        'transition-all duration-200 rounded-sm cursor-pointer',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60',
         'disabled:pointer-events-none disabled:opacity-40',
         variantClasses[variant],
