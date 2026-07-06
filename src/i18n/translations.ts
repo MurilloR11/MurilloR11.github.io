@@ -190,7 +190,7 @@ export const translations: Record<'es' | 'en', Translations> = {
       sectionLoadError: 'Error al cargar esta sección.',
     },
     meta: {
-      title: 'Santiago — Desarrollador Frontend',
+      title: 'Santiago Murillo Montealegre',
     },
   },
   en: {
@@ -286,7 +286,7 @@ export const translations: Record<'es' | 'en', Translations> = {
       sectionLoadError: 'Error loading this section.',
     },
     meta: {
-      title: 'Santiago — Frontend Developer',
+      title: 'Santiago Murillo Montealegre',
     },
   },
 };
