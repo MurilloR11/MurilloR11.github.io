@@ -1,0 +1,1 @@
+import{a as e,i as t,s as n}from"./translations-CJO4Mt_Q.js";import{t as r}from"./cn-DXIsWPpg.js";n(e(),1);var i=t();function a({children:e,id:t,className:n}){return(0,i.jsx)(`section`,{id:t,"aria-labelledby":`${t}-heading`,className:r(`py-14 px-4 sm:py-16 sm:px-6 md:py-20 max-w-5xl mx-auto w-full`,n),children:e})}export{a as t};
