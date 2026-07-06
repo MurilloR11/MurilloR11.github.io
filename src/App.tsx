@@ -40,13 +40,13 @@ export function App() {
 
         <ErrorBoundary>
           <Suspense fallback={<SectionFallback />}>
-            <SkillsSection />
+            <ProjectsSection />
           </Suspense>
         </ErrorBoundary>
 
         <ErrorBoundary>
           <Suspense fallback={<SectionFallback />}>
-            <ProjectsSection />
+            <SkillsSection />
           </Suspense>
         </ErrorBoundary>
 
