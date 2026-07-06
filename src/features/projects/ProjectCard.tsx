@@ -1,5 +1,5 @@
-import { Badge } from '@components/ui/Badge/Badge';
-import { CATEGORY_LABELS, type Project } from './projects.types';
+import { Link } from 'react-router-dom';
+import { type Project } from './projects.types';
 
 interface ProjectCardProps {
   project: Project;
@@ -14,7 +14,7 @@ const PLACEHOLDER_GRADIENTS = [
 ];
 
 export const ProjectCard = function ProjectCard({ project, number }: ProjectCardProps) {
-  const { title, description, tags, category, githubUrl, liveUrl, thumbnail } = project;
+  const { id, title, description, liveUrl, thumbnail } = project;
   const num = String(number).padStart(2, '0');
   const gradient = PLACEHOLDER_GRADIENTS[(number - 1) % PLACEHOLDER_GRADIENTS.length];
 
@@ -68,11 +68,6 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
       {/* ── Content ── */}
       <div className="flex flex-1 flex-col">
 
-        {/* Category */}
-        <span className="mb-2 text-[0.58rem] font-medium uppercase tracking-widest text-gold/70">
-          {CATEGORY_LABELS[category]}
-        </span>
-
         {/* Title */}
         <h3 className="font-display mb-3 text-[1.4rem] sm:text-[1.7rem] font-bold italic leading-tight text-cream transition-colors duration-200 group-hover/card:text-gold">
           {title}
@@ -80,23 +75,14 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
         </h3>
 
         {/* Description */}
-        <p className="mb-4 max-w-xl text-[0.78rem] leading-relaxed text-muted">
+        <p className="mb-6 max-w-xl text-[0.78rem] leading-relaxed text-muted">
           {description}
         </p>
 
-        {/* Tags */}
-        <div className="mb-5 flex flex-wrap gap-1.5">
-          {tags.map((tag) => (
-            <Badge key={tag} label={tag} />
-          ))}
-        </div>
-
-        {/* CTA — links to where everything about the project lives */}
+        {/* CTA — links to the project's own detail page */}
         <div className="flex flex-wrap items-center gap-5">
-          <a
-            href={githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={`/proyectos/${id}`}
             className="group/link inline-flex w-fit items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] font-medium uppercase tracking-widest text-gold transition-colors duration-200 hover:border-gold hover:text-cream focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
           >
             Ver proyecto
@@ -106,7 +92,7 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
             >
               →
             </span>
-          </a>
+          </Link>
 
           {liveUrl && (
             <a

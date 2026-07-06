@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { type NavLink } from '@app-types/global.types';
 import { useScrollSpy } from '@hooks/useScrollSpy';
 import { ThemeToggle } from '@components/ui/ThemeToggle/ThemeToggle';
@@ -50,13 +51,13 @@ export function Navbar() {
         aria-label="Navegación principal"
         className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-6 py-4"
       >
-        <a
-          href="#hero"
+        <Link
+          to="/"
           className="group flex items-center gap-1.5 focus-visible:outline-none"
           aria-label="Santiago, inicio"
         >
           <BrandLogo />
-        </a>
+        </Link>
 
         <div className="flex items-center gap-3 sm:gap-5">
 
@@ -66,15 +67,15 @@ export function Navbar() {
               const isActive = activeId === href.slice(1);
               return (
                 <li key={href}>
-                  <a
-                    href={href}
+                  <Link
+                    to={`/${href}`}
                     aria-current={isActive ? 'true' : undefined}
                     className={`text-[0.65rem] font-medium tracking-[0.18em] uppercase transition-colors focus-visible:rounded focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
                       isActive ? 'text-gold' : 'text-muted hover:text-gold'
                     }`}
                   >
                     {label}
-                  </a>
+                  </Link>
                 </li>
               );
             })}
@@ -122,8 +123,8 @@ export function Navbar() {
             const isActive = activeId === href.slice(1);
             return (
               <li key={href}>
-                <a
-                  href={href}
+                <Link
+                  to={`/${href}`}
                   onClick={() => setIsMenuOpen(false)}
                   aria-current={isActive ? 'true' : undefined}
                   className={`block py-3 text-[0.72rem] font-medium tracking-[0.18em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold ${
@@ -131,7 +132,7 @@ export function Navbar() {
                   }`}
                 >
                   {label}
-                </a>
+                </Link>
               </li>
             );
           })}
