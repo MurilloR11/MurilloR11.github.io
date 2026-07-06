@@ -15,6 +15,13 @@ const TECH_COLORS: Record<string, { bg: string; text: string }> = {
   'prettier':         { bg: '#F7B93E', text: '#1A1A1A' },
   'vitest':           { bg: '#6E9F18', text: '#FFFFFF' },
   'testing library':  { bg: '#E33332', text: '#FFFFFF' },
+  'tanstack query':   { bg: '#FF4154', text: '#FFFFFF' },
+  'react query':      { bg: '#FF4154', text: '#FFFFFF' },
+  'supabase':         { bg: '#3ECF8E', text: '#0B1220' },
+  'zod':              { bg: '#3E67B1', text: '#FFFFFF' },
+  'radix ui':         { bg: '#FFFFFF', text: '#0B1220' },
+  'axios':            { bg: '#5A29E4', text: '#FFFFFF' },
+  'playwright':       { bg: '#2EAD33', text: '#FFFFFF' },
 };
 
 const FALLBACK_COLOR = { bg: 'var(--color-elevated)', text: 'var(--color-cream)', isFallback: true };
