@@ -21,6 +21,7 @@ import {
   Figma,
   Swagger,
   Sentry,
+  Postman,
 } from '@ridemountainpig/svgl-react';
 
 type IconComponent = (props: SVGProps<SVGSVGElement>) => React.JSX.Element;
@@ -91,6 +92,7 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
       { name: 'Figma', icon: Figma },
       { name: 'Swagger', icon: Swagger },
       { name: 'Sentry', icon: Sentry },
+      { name: 'Postman', icon: Postman },
     ],
   },
 ];
