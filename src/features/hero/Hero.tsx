@@ -24,21 +24,6 @@ export function Hero() {
 
       <div className="relative z-10 mx-auto w-full max-w-5xl">
 
-        {/* Availability badge */}
-        <span
-          className="mb-7 inline-flex items-center gap-2.5 rounded-full border border-gold/25 bg-gold/7 px-4 py-2 text-[0.65rem] font-medium uppercase tracking-widest text-gold animate-fade-in delay-100"
-          aria-label="Estado: disponible para trabajar"
-        >
-          <span
-            className="relative flex h-1.5 w-1.5 shrink-0"
-            aria-hidden="true"
-          >
-            <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-gold opacity-60" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-gold" />
-          </span>
-          Disponible para trabajar
-        </span>
-
         {/* Pre-heading */}
         <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.25em] text-muted animate-fade-up delay-200">
           Hola, soy
