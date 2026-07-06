@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react';
+import { useTranslation } from '@i18n/translations';
 import { Hero } from '@features/hero/Hero';
 import { ErrorBoundary } from '@components/ErrorBoundary';
 
@@ -23,35 +24,42 @@ function SectionFallback() {
 }
 
 export function HomePage() {
+  const t = useTranslation();
+  const errorFallback = (
+    <div className="mx-auto max-w-5xl px-6 py-20 text-[0.75rem] text-muted">
+      {t.errorBoundary.sectionLoadError}
+    </div>
+  );
+
   return (
     <>
       <Hero />
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={errorFallback}>
         <Suspense fallback={<SectionFallback />}>
           <About />
         </Suspense>
       </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={errorFallback}>
         <Suspense fallback={<SectionFallback />}>
           <ProjectsSection />
         </Suspense>
       </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={errorFallback}>
         <Suspense fallback={<SectionFallback />}>
           <SkillsSection />
         </Suspense>
       </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={errorFallback}>
         <Suspense fallback={<SectionFallback />}>
           <EducationSection />
         </Suspense>
       </ErrorBoundary>
 
-      <ErrorBoundary>
+      <ErrorBoundary fallback={errorFallback}>
         <Suspense fallback={<SectionFallback />}>
           <ContactSection />
         </Suspense>

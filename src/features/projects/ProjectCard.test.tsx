@@ -1,24 +1,28 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import { LanguageProvider } from '@context/LanguageContext';
 import { ProjectCard } from './ProjectCard';
 import { type Project } from './projects.types';
 
 const baseProject: Project = {
   id: 'test-project',
-  title: 'Mi Proyecto Test',
-  description: 'Descripción del proyecto de prueba.',
+  title: { es: 'Mi Proyecto Test', en: 'My Test Project' },
+  description: { es: 'Descripción del proyecto de prueba.', en: 'Test project description.' },
   tags: ['React', 'TypeScript'],
   category: 'frontend',
   githubUrl: 'https://github.com/user/repo',
 };
 
-// ProjectCard renders a react-router <Link>, so every render needs a Router ancestor
+// ProjectCard renders a react-router <Link> and reads translations, so every
+// render needs both a Router and a LanguageProvider ancestor.
 function renderCard(project: Project, number: number) {
   return render(
-    <MemoryRouter>
-      <ProjectCard project={project} number={number} />
-    </MemoryRouter>
+    <LanguageProvider>
+      <MemoryRouter>
+        <ProjectCard project={project} number={number} />
+      </MemoryRouter>
+    </LanguageProvider>
   );
 }
 

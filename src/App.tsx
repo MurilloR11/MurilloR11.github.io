@@ -1,6 +1,8 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from '@context/ThemeContext';
+import { LanguageProvider } from '@context/LanguageContext';
+import { useTranslation } from '@i18n/translations';
 import { Navbar } from '@components/layout/Navbar/Navbar';
 import { Footer } from '@components/layout/Footer/Footer';
 import { ErrorBoundary } from '@components/ErrorBoundary';
@@ -17,10 +19,26 @@ function PageFallback() {
   return <div className="mx-auto min-h-[60vh] max-w-5xl animate-pulse rounded-sm bg-surface px-6" aria-hidden="true" />;
 }
 
-// Named export per SKILL (main.tsx also updated to match)
-export function App() {
+function ErrorFallback() {
+  const t = useTranslation();
   return (
-    <ThemeProvider>
+    <div className="mx-auto max-w-5xl px-6 py-20 text-[0.75rem] text-muted">
+      {t.errorBoundary.sectionLoadError}
+    </div>
+  );
+}
+
+function AppShell() {
+  const t = useTranslation();
+
+  // index.html ships a static <title> for first paint; keep it in sync with
+  // the active language once React has mounted.
+  useEffect(() => {
+    document.title = t.meta.title;
+  }, [t]);
+
+  return (
+    <>
       <ScrollManager />
 
       {/* Semantic HTML per SKILL: <header> inside Navbar, <main> wraps page content */}
@@ -32,7 +50,7 @@ export function App() {
           <Route
             path="/proyectos/:id"
             element={
-              <ErrorBoundary>
+              <ErrorBoundary fallback={<ErrorFallback />}>
                 <Suspense fallback={<PageFallback />}>
                   <ProjectDetailPage />
                 </Suspense>
@@ -43,6 +61,17 @@ export function App() {
       </main>
 
       <Footer />
+    </>
+  );
+}
+
+// Named export per SKILL (main.tsx also updated to match)
+export function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppShell />
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

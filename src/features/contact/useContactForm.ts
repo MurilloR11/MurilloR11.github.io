@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from '@i18n/translations';
 
 interface FormFields {
   name: string;
@@ -20,20 +21,21 @@ interface UseContactFormReturn {
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function validate(fields: FormFields): FormErrors {
+function validate(fields: FormFields, errorMessages: ReturnType<typeof useTranslation>['contact']['form']['errors']): FormErrors {
   const errors: FormErrors = {};
-  if (!fields.name.trim()) errors.name = 'El nombre es obligatorio.';
+  if (!fields.name.trim()) errors.name = errorMessages.nameRequired;
   if (!fields.email.trim()) {
-    errors.email = 'El email es obligatorio.';
+    errors.email = errorMessages.emailRequired;
   } else if (!EMAIL_REGEX.test(fields.email)) {
-    errors.email = 'Ingresa un email válido.';
+    errors.email = errorMessages.emailInvalid;
   }
-  if (!fields.message.trim()) errors.message = 'El mensaje es obligatorio.';
+  if (!fields.message.trim()) errors.message = errorMessages.messageRequired;
   return errors;
 }
 
 // Custom hook — all form logic extracted from ContactForm per SKILL
 export function useContactForm(): UseContactFormReturn {
+  const t = useTranslation();
   const [fields, setFields] = useState<FormFields>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<FormStatus>('idle');
   const [errors, setErrors] = useState<FormErrors>({});
@@ -49,7 +51,7 @@ export function useContactForm(): UseContactFormReturn {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const validationErrors = validate(fields);
+    const validationErrors = validate(fields, t.contact.form.errors);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;

@@ -1,8 +1,11 @@
 import { Button } from '@components/ui/Button/Button';
+import { useTranslation } from '@i18n/translations';
 
 const SCROLL_SMOOTH: ScrollIntoViewOptions = { behavior: 'smooth' };
 
 export function Hero() {
+  const t = useTranslation();
+
   return (
     <div
       id="hero"
@@ -26,7 +29,7 @@ export function Hero() {
 
         {/* Pre-heading */}
         <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.25em] text-muted animate-fade-up delay-200">
-          Hola, soy
+          {t.hero.preHeading}
         </p>
 
         {/* Name — massive italic serif */}
@@ -44,8 +47,7 @@ export function Hero() {
 
         {/* Tagline */}
         <p className="mb-10 max-w-md text-[0.82rem] leading-relaxed text-muted animate-fade-up delay-500">
-          Desarrollador frontend junior apasionado por construir
-          interfaces rápidas, accesibles y con buen diseño.
+          {t.hero.tagline}
         </p>
 
         {/* CTAs */}
@@ -55,7 +57,7 @@ export function Hero() {
               document.getElementById('projects')?.scrollIntoView(SCROLL_SMOOTH)
             }
           >
-            Ver proyectos ↗
+            {t.hero.ctaProjects}
           </Button>
 
           <a
@@ -63,7 +65,7 @@ export function Hero() {
             download
             className="inline-flex items-center justify-center rounded-sm border border-border-dark px-5 py-2.5 text-[0.75rem] font-medium tracking-[0.12em] uppercase text-muted transition-all duration-200 hover:border-gold/40 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
           >
-            Descargar CV ↓
+            {t.hero.ctaResume}
           </a>
         </div>
       </div>

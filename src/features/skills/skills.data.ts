@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+import type { Language } from '@app-types/global.types';
 import {
   HTML5,
   CSS,
@@ -38,13 +39,15 @@ export interface SkillItem {
 }
 
 export interface SkillCategory {
-  label: string;
+  id: string;
+  label: Record<Language, string>;
   items: SkillItem[];
 }
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    label: 'Frontend',
+    id: 'frontend',
+    label: { es: 'Frontend', en: 'Frontend' },
     items: [
       { name: 'HTML5', icon: HTML5 },
       { name: 'CSS3', icon: CSS },
@@ -56,7 +59,8 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
   {
-    label: 'Routing y estado',
+    id: 'routing-state',
+    label: { es: 'Routing y estado', en: 'Routing & state' },
     items: [
       { name: 'React Router', icon: ReactRouter },
       { name: 'TanStack Query', icon: TanStack },
@@ -64,28 +68,32 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
     ],
   },
   {
-    label: 'UI y componentes',
+    id: 'ui-components',
+    label: { es: 'UI y componentes', en: 'UI & components' },
     items: [
       { name: 'Radix UI', icon: RadixUIDark, iconLight: RadixUILight },
       { name: 'Framer Motion', icon: FramerDark, iconLight: FramerLight },
     ],
   },
   {
-    label: 'Backend y datos',
+    id: 'backend-data',
+    label: { es: 'Backend y datos', en: 'Backend & data' },
     items: [
       { name: 'Supabase', icon: Supabase },
       { name: 'Chart.js', icon: Chartjs },
     ],
   },
   {
-    label: 'Testing',
+    id: 'testing',
+    label: { es: 'Testing', en: 'Testing' },
     items: [
       { name: 'Vitest', icon: Vitest },
       { name: 'Playwright', icon: Playwright },
     ],
   },
   {
-    label: 'Herramientas',
+    id: 'tools',
+    label: { es: 'Herramientas', en: 'Tools' },
     items: [
       { name: 'Git', icon: Git },
       { name: 'Figma', icon: Figma },

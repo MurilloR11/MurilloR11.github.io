@@ -16,6 +16,7 @@ export default defineConfig({
       '@context': resolve(__dirname, 'src/context'),
       '@utils': resolve(__dirname, 'src/utils'),
       '@app-types': resolve(__dirname, 'src/types'),
+      '@i18n': resolve(__dirname, 'src/i18n'),
     },
   },
   test: {

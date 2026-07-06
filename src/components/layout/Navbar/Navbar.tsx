@@ -2,16 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { type NavLink } from '@app-types/global.types';
 import { useScrollSpy } from '@hooks/useScrollSpy';
+import { useTranslation } from '@i18n/translations';
 import { ThemeToggle } from '@components/ui/ThemeToggle/ThemeToggle';
+import { LanguageToggle } from '@components/ui/LanguageToggle/LanguageToggle';
 import { BrandLogo } from '@components/ui/BrandLogo/BrandLogo';
-
-const NAV_LINKS: NavLink[] = [
-  { label: 'Sobre mí',   href: '#about' },
-  { label: 'Proyectos',  href: '#projects' },
-  { label: 'Skills',     href: '#skills' },
-  { label: 'Educación',  href: '#education' },
-  { label: 'Contacto',   href: '#contact' },
-];
 
 // Defined outside component so the array reference is stable across renders
 // (prevents useEffect in useScrollSpy from re-running on every render)
@@ -21,6 +15,15 @@ export function Navbar() {
   const [isScrolled, setIsScrolled]   = useState(false);
   const [isMenuOpen, setIsMenuOpen]   = useState(false);
   const activeId = useScrollSpy(SECTION_IDS);
+  const t = useTranslation();
+
+  const navLinks: NavLink[] = [
+    { label: t.nav.about,     href: '#about' },
+    { label: t.nav.projects,  href: '#projects' },
+    { label: t.nav.skills,    href: '#skills' },
+    { label: t.nav.education, href: '#education' },
+    { label: t.nav.contact,   href: '#contact' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -45,17 +48,17 @@ export function Navbar() {
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded focus:bg-gold focus:px-4 focus:py-2 focus:text-base focus:font-medium"
       >
-        Saltar al contenido
+        {t.nav.skipToContent}
       </a>
 
       <nav
-        aria-label="Navegación principal"
+        aria-label={t.nav.mainNav}
         className="mx-auto flex max-w-5xl items-center justify-between px-4 sm:px-6 py-4"
       >
         <Link
           to="/"
           className="group flex items-center gap-1.5 focus-visible:outline-none"
-          aria-label="Santiago, inicio"
+          aria-label={t.nav.home}
         >
           <BrandLogo />
         </Link>
@@ -64,7 +67,7 @@ export function Navbar() {
 
           {/* Desktop nav links — hidden on mobile */}
           <ul className="hidden sm:flex items-center gap-7">
-            {NAV_LINKS.map(({ label, href }) => {
+            {navLinks.map(({ label, href }) => {
               const isActive = activeId === href.slice(1);
               return (
                 <li key={href}>
@@ -82,13 +85,14 @@ export function Navbar() {
             })}
           </ul>
 
+          <LanguageToggle />
           <ThemeToggle />
 
           {/* Hamburger button — mobile only */}
           <button
             className="sm:hidden flex h-8 w-8 flex-col items-center justify-center gap-[5px] rounded-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            aria-label={isMenuOpen ? 'Cerrar menú' : 'Abrir menú'}
+            aria-label={isMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
           >
@@ -116,11 +120,11 @@ export function Navbar() {
       <div
         id="mobile-menu"
         className={`sm:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+          isMenuOpen ? 'max-h-80 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
         <ul className="border-t border-border-dark px-4 py-3 flex flex-col">
-          {NAV_LINKS.map(({ label, href }) => {
+          {navLinks.map(({ label, href }) => {
             const isActive = activeId === href.slice(1);
             return (
               <li key={href}>
@@ -138,6 +142,9 @@ export function Navbar() {
             );
           })}
         </ul>
+        <div className="border-t border-border-dark px-4 py-3">
+          <LanguageToggle />
+        </div>
       </div>
     </header>
   );

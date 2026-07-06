@@ -2,14 +2,17 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '@context/ThemeContext';
+import { LanguageProvider } from '@context/LanguageContext';
 import { ThemeToggle } from './ThemeToggle';
 
 function renderWithTheme(initialTheme: 'dark' | 'light' = 'dark') {
   localStorage.setItem('theme', initialTheme);
   return render(
-    <ThemeProvider>
-      <ThemeToggle />
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <ThemeToggle />
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 

@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useLanguage } from '@context/LanguageContext';
+import { useTranslation } from '@i18n/translations';
 import { type Project } from './projects.types';
 
 interface ProjectCardProps {
@@ -14,6 +16,8 @@ const PLACEHOLDER_GRADIENTS = [
 ];
 
 export const ProjectCard = function ProjectCard({ project, number }: ProjectCardProps) {
+  const { language } = useLanguage();
+  const t = useTranslation();
   const { id, title, description, liveUrl, thumbnail } = project;
   const num = String(number).padStart(2, '0');
   const gradient = PLACEHOLDER_GRADIENTS[(number - 1) % PLACEHOLDER_GRADIENTS.length];
@@ -31,7 +35,7 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
         {thumbnail ? (
           <img
             src={thumbnail}
-            alt={`Captura de pantalla del proyecto ${title}`}
+            alt={`${t.projectDetail.screenshotAlt} ${title[language]}`}
             width={600}
             height={338}
             loading="lazy"
@@ -70,13 +74,13 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
 
         {/* Title */}
         <h3 className="font-display mb-3 text-[1.4rem] sm:text-[1.7rem] font-bold italic leading-tight text-cream transition-colors duration-200 group-hover/card:text-gold">
-          {title}
+          {title[language]}
           <span className="text-gold" aria-hidden="true">.</span>
         </h3>
 
         {/* Description */}
         <p className="mb-6 max-w-xl text-[0.78rem] leading-relaxed text-muted">
-          {description}
+          {description[language]}
         </p>
 
         {/* CTA — links to the project's own detail page */}
@@ -85,7 +89,7 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
             to={`/proyectos/${id}`}
             className="group/link inline-flex w-fit items-center gap-2 border-b border-gold/40 pb-1 text-[0.68rem] font-medium uppercase tracking-widest text-gold transition-colors duration-200 hover:border-gold hover:text-cream focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
           >
-            Ver proyecto
+            {t.projects.viewProject}
             <span
               aria-hidden="true"
               className="inline-block transition-transform duration-150 group-hover/link:translate-x-1"
@@ -101,7 +105,7 @@ export const ProjectCard = function ProjectCard({ project, number }: ProjectCard
               rel="noopener noreferrer"
               className="text-[0.63rem] font-medium uppercase tracking-widest text-subtle transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             >
-              Demo ↗
+              {t.projects.demo}
             </a>
           )}
         </div>

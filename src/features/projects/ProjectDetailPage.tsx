@@ -1,6 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { GitHubDark, GitHubLight } from '@ridemountainpig/svgl-react';
 import { useTheme } from '@context/ThemeContext';
+import { useLanguage } from '@context/LanguageContext';
+import { useTranslation } from '@i18n/translations';
 import { PROJECTS } from './projects.data';
 import { getTechColor } from './techColors';
 
@@ -20,6 +22,8 @@ function StackBadge({ label }: { label: string }) {
 export function ProjectDetailPage() {
   const { id } = useParams<{ id: string }>();
   const { mode } = useTheme();
+  const { language } = useLanguage();
+  const t = useTranslation();
   const GitHubIcon = mode === 'dark' ? GitHubDark : GitHubLight;
   const index = PROJECTS.findIndex((p) => p.id === id);
   const project = index === -1 ? undefined : PROJECTS[index];
@@ -27,9 +31,9 @@ export function ProjectDetailPage() {
   if (!project) {
     return (
       <div className="mx-auto w-full max-w-5xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32">
-        <span className="section-label">── proyecto / no encontrado</span>
+        <span className="section-label">{t.projectDetail.notFoundLabel}</span>
         <h1 id="project-detail-heading" className="display-title">
-          Proyecto no encontrado.
+          {t.projectDetail.notFoundHeading}
         </h1>
       </div>
     );
@@ -38,10 +42,11 @@ export function ProjectDetailPage() {
   const { title, description, longDescription, tags, stack, notes, githubUrl, liveUrl, thumbnail } = project;
   const num = String(index + 1).padStart(2, '0');
   const stackItems = stack ?? tags;
+  const projectNotes = notes?.[language];
 
   return (
     <article className="mx-auto w-full max-w-5xl px-4 pb-20 pt-28 sm:px-6 sm:pt-32">
-      <span className="section-label animate-fade-up">── proyecto / {num}</span>
+      <span className="section-label animate-fade-up">{t.projectDetail.sectionLabelPrefix} {num}</span>
 
       <div className="animate-fade-up delay-100 mb-8 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
         <div>
@@ -49,7 +54,7 @@ export function ProjectDetailPage() {
             id="project-detail-heading"
             className="font-display text-[clamp(2rem,5.5vw,3.6rem)] font-bold italic leading-[1.05] text-cream"
           >
-            {title}
+            {title[language]}
             <span className="text-gold" aria-hidden="true">.</span>
           </h1>
         </div>
@@ -64,7 +69,7 @@ export function ProjectDetailPage() {
             <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center" aria-hidden="true">
               <GitHubIcon width="100%" height="100%" />
             </span>
-            Ver en GitHub
+            {t.projectDetail.viewOnGithub}
             <span
               aria-hidden="true"
               className="inline-block transition-transform duration-150 group-hover/link:translate-x-1"
@@ -80,7 +85,7 @@ export function ProjectDetailPage() {
               rel="noopener noreferrer"
               className="text-[0.63rem] font-medium uppercase tracking-widest text-subtle transition-colors hover:text-gold focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gold"
             >
-              Demo ↗
+              {t.projectDetail.demo}
             </a>
           )}
         </div>
@@ -93,7 +98,7 @@ export function ProjectDetailPage() {
         {thumbnail ? (
           <img
             src={thumbnail}
-            alt={`Captura de pantalla del proyecto ${title}`}
+            alt={`${t.projectDetail.screenshotAlt} ${title[language]}`}
             className="h-full w-full object-cover"
           />
         ) : (
@@ -112,15 +117,15 @@ export function ProjectDetailPage() {
         {/* Case study */}
         <div className="max-w-2xl">
           <h2 className="mb-4 text-[0.62rem] font-medium uppercase tracking-widest text-gold">
-            Sobre el proyecto
+            {t.projectDetail.aboutProject}
           </h2>
           <p className="whitespace-pre-line text-[0.85rem] leading-relaxed text-muted">
-            {longDescription ?? description}
+            {longDescription?.[language] ?? description[language]}
           </p>
 
-          {notes && notes.length > 0 && (
+          {projectNotes && projectNotes.length > 0 && (
             <ul className="mt-5 flex flex-col gap-3">
-              {notes.map((note) => (
+              {projectNotes.map((note) => (
                 <li key={note} className="flex gap-3 text-[0.8rem] leading-relaxed text-muted">
                   <span className="text-gold" aria-hidden="true">—</span>
                   {note}
@@ -133,7 +138,7 @@ export function ProjectDetailPage() {
         {/* Stack */}
         <div className="lg:w-64 lg:shrink-0">
           <h2 className="mb-4 text-[0.62rem] font-medium uppercase tracking-widest text-gold">
-            Stack técnico
+            {t.projectDetail.techStack}
           </h2>
           <div className="flex flex-wrap gap-2">
             {stackItems.map((item) => (

@@ -1,18 +1,21 @@
 import { Section } from '@components/layout/Section/Section';
+import { useTranslation } from '@i18n/translations';
 import { ProjectCard } from './ProjectCard';
 import { PROJECTS } from './projects.data';
 
 export function ProjectsSection() {
+  const t = useTranslation();
+
   return (
     <Section id="projects" className="border-t border-border-dark">
-      <span className="section-label">── 04 / trabajos</span>
+      <span className="section-label">{t.projects.sectionLabel}</span>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-10">
         <h2 id="projects-heading" className="display-title">
-          Proyectos
+          {t.projects.heading}
         </h2>
         <p className="text-[0.72rem] text-muted sm:text-right leading-relaxed">
-          Una selección de mis<br />trabajos más representativos.
+          {t.projects.subtitleLine1}<br />{t.projects.subtitleLine2}
         </p>
       </div>
 

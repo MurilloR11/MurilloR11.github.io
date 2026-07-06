@@ -1,8 +1,10 @@
 import { Button } from '@components/ui/Button/Button';
+import { useTranslation } from '@i18n/translations';
 import { useContactForm } from './useContactForm';
 
 export function ContactForm() {
   const { fields, status, errors, handleChange, handleSubmit } = useContactForm();
+  const t = useTranslation();
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-5">
@@ -12,7 +14,7 @@ export function ContactForm() {
           htmlFor="name"
           className="mb-2 block text-[0.62rem] font-medium uppercase tracking-widest text-muted"
         >
-          Nombre
+          {t.contact.form.nameLabel}
         </label>
         <input
           id="name"
@@ -20,7 +22,7 @@ export function ContactForm() {
           type="text"
           value={fields.name}
           onChange={handleChange}
-          placeholder="Tu nombre"
+          placeholder={t.contact.form.namePlaceholder}
           aria-describedby={errors.name ? 'name-error' : undefined}
           aria-invalid={!!errors.name}
           className="input-dark"
@@ -37,7 +39,7 @@ export function ContactForm() {
           htmlFor="email"
           className="mb-2 block text-[0.62rem] font-medium uppercase tracking-widest text-muted"
         >
-          Email
+          {t.contact.form.emailLabel}
         </label>
         <input
           id="email"
@@ -45,7 +47,7 @@ export function ContactForm() {
           type="email"
           value={fields.email}
           onChange={handleChange}
-          placeholder="tu@email.com"
+          placeholder={t.contact.form.emailPlaceholder}
           aria-describedby={errors.email ? 'email-error' : undefined}
           aria-invalid={!!errors.email}
           className="input-dark"
@@ -62,7 +64,7 @@ export function ContactForm() {
           htmlFor="message"
           className="mb-2 block text-[0.62rem] font-medium uppercase tracking-widest text-muted"
         >
-          Mensaje
+          {t.contact.form.messageLabel}
         </label>
         <textarea
           id="message"
@@ -71,7 +73,7 @@ export function ContactForm() {
           maxLength={2000}
           value={fields.message}
           onChange={handleChange}
-          placeholder="Cuéntame sobre tu proyecto..."
+          placeholder={t.contact.form.messagePlaceholder}
           aria-describedby={errors.message ? 'message-error' : undefined}
           aria-invalid={!!errors.message}
           className="input-dark"
@@ -84,17 +86,17 @@ export function ContactForm() {
       </div>
 
       <Button type="submit" disabled={status === 'sending'} className="w-full justify-center">
-        {status === 'sending' ? 'Enviando…' : 'Enviar mensaje ↗'}
+        {status === 'sending' ? t.contact.form.sending : t.contact.form.submit}
       </Button>
 
       {status === 'success' && (
         <p role="alert" className="text-[0.75rem] text-gold">
-          ¡Mensaje enviado! Te responderé pronto.
+          {t.contact.form.success}
         </p>
       )}
       {status === 'error' && (
         <p role="alert" className="text-[0.75rem] text-muted">
-          Hubo un error. Inténtalo de nuevo o escríbeme directamente.
+          {t.contact.form.error}
         </p>
       )}
     </form>

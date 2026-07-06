@@ -1,5 +1,7 @@
 import { Section } from '@components/layout/Section/Section';
 import { useTheme } from '@context/ThemeContext';
+import { useLanguage } from '@context/LanguageContext';
+import { useTranslation } from '@i18n/translations';
 import { SKILL_CATEGORIES, type SkillItem } from './skills.data';
 
 // Stagger category blocks in on enter, cascading top to bottom
@@ -26,16 +28,19 @@ function SkillBadge({ skill }: { skill: SkillItem }) {
 }
 
 export function SkillsSection() {
+  const { language } = useLanguage();
+  const t = useTranslation();
+
   return (
     <Section id="skills" className="border-t border-border-dark">
-      <span className="section-label">── 03 / tecnologías</span>
+      <span className="section-label">{t.skills.sectionLabel}</span>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-10">
         <h2 id="skills-heading" className="display-title">
-          Skills
+          {t.skills.heading}
         </h2>
         <p className="text-[0.72rem] text-muted sm:text-right leading-relaxed">
-          Tecnologías y herramientas<br />con las que trabajo.
+          {t.skills.subtitleLine1}<br />{t.skills.subtitleLine2}
         </p>
       </div>
 
@@ -44,12 +49,12 @@ export function SkillsSection() {
       <div className="flex flex-col">
         {SKILL_CATEGORIES.map((category, index) => (
           <div
-            key={category.label}
+            key={category.id}
             className="animate-fade-up border-t border-border-dark py-7 first:border-t-0 first:pt-0"
             style={{ animationDelay: `${CATEGORY_BASE_DELAY_MS + index * CATEGORY_STAGGER_MS}ms` }}
           >
             <h3 className="mb-5 text-[0.62rem] font-medium uppercase tracking-widest text-gold">
-              {category.label}
+              {category.label[language]}
             </h3>
             <ul className="flex flex-wrap gap-3">
               {category.items.map((skill) => (

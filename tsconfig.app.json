@@ -32,7 +32,8 @@
       "@assets/*": ["src/assets/*"],
       "@context/*": ["src/context/*"],
       "@utils/*": ["src/utils/*"],
-      "@app-types/*": ["src/types/*"]
+      "@app-types/*": ["src/types/*"],
+      "@i18n/*": ["src/i18n/*"]
     }
   },
   "include": ["src"]
