@@ -51,8 +51,9 @@ export function Hero() {
         </p>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 animate-fade-up delay-600">
+        <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-4 animate-fade-up delay-600">
           <Button
+            className="w-full sm:w-auto"
             onClick={() =>
               document.getElementById('projects')?.scrollIntoView(SCROLL_SMOOTH)
             }
@@ -63,7 +64,7 @@ export function Hero() {
           <a
             href="/resume.pdf"
             download
-            className="inline-flex items-center justify-center rounded-sm border border-border-dark px-5 py-2.5 text-[0.75rem] font-medium tracking-[0.12em] uppercase text-muted transition-all duration-200 hover:border-gold/40 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
+            className="inline-flex w-full sm:w-auto items-center justify-center rounded-sm border border-border-dark px-5 py-2.5 text-[0.75rem] font-medium tracking-[0.12em] uppercase text-muted transition-all duration-200 hover:border-gold/40 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/60"
           >
             {t.hero.ctaResume}
           </a>
